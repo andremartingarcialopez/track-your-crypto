@@ -8,13 +8,16 @@ import { devtools } from "zustand/middleware";
 type CryptoStoreTypes = {
     cryptosSelect: CryptoSelect
     cryptoInfo: CryptoInfo
+    spinner: boolean
     fetchCryptos: () => void
     fetchCryptoInfo: (selectForm: SelectForm) => void
+
 }
 
 export const useCryptoStore = create<CryptoStoreTypes>()(
     devtools((set) => ({
         cryptosSelect: [],
+        spinner: false,
         cryptoInfo: {
             PRICE: "",
             LOWDAY: "",
@@ -33,10 +36,15 @@ export const useCryptoStore = create<CryptoStoreTypes>()(
         },
 
         fetchCryptoInfo: async (selectForm: SelectForm) => {
+            set((state) => ({
+                ...state,
+                spinner: true
+            }))
             const result = await getCryptoInfo(selectForm)
             set((state) => ({
                 ...state,
-                cryptoInfo: result
+                cryptoInfo: result,
+                spinner: false
             }))
         }
     }))
