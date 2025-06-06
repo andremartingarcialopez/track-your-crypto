@@ -5,6 +5,6 @@ type CryptoInfoIteamProps = {
 
 export default function CryptoInfoIteam({ label, data }: CryptoInfoIteamProps) {
     return (
-        <p className="text-gray-900 font-normal md:text-lg">{label}: <span className="font-extrabold">{data}</span></p>
+        <p className="text-sm md:text-lg text-gray-900 font-normal">{label}: <span className="font-extrabold">{data}</span></p>
     )
 }
