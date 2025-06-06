@@ -1,16 +1,48 @@
+import { useState } from "react";
 import { currencies } from "../data/data";
 import { useCryptoStore } from "../store/store";
+import ErrorMessage from "./ErrorMessage";
 
 export default function Form() {
 
-    const { cryptosSelect } = useCryptoStore()
+    const { cryptosSelect } = useCryptoStore();
+    const [error, setError] = useState("");
+    const [selectForm, setSelectForm] = useState({
+        currency: "",
+        cryptoCurrency: ""
+    });
+
+    function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        setSelectForm({
+            ...selectForm,
+            [e.target.id]: e.target.value
+        })
+    }
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        if (Object.values(selectForm).includes("")) {
+            setError("Todos los campos son obligatorios");
+            return;
+        }
+
+        setError("");
+        console.log(selectForm);
+    }
 
     return (
-        <form className="glass p-5 mx-2 mb-4 flex flex-col justify-center items-stretch space-y-4">
+        <form onSubmit={handleSubmit} className="glass p-5 mx-2 mb-4 flex flex-col justify-center items-stretch space-y-4">
+            {error &&
+                <ErrorMessage>
+                    {error}
+                </ErrorMessage>
+            }
             <div>
                 <label className="font-semibold text-gray-800" htmlFor="currency">Moneda</label>
                 <select className="glass w-full px-1 py-2"
-                    id="currency">
+                    id="currency"
+                    value={selectForm.currency}
+                    onChange={handleChange}>
                     <option value="">--Seleccionar--</option>
                     {currencies.map(function (currency) {
                         return (
@@ -23,7 +55,9 @@ export default function Form() {
             <div>
                 <label className="font-semibold text-gray-800" htmlFor="cryptoCurrency">CryptoMoneda</label>
                 <select className="glass w-full px-1 py-2"
-                    id="cryptoCurrency">
+                    id="cryptoCurrency"
+                    value={selectForm.cryptoCurrency}
+                    onChange={handleChange}>
                     <option value="">--Seleccionar--</option>
                     {cryptosSelect.map(function (crypto) {
                         return (
@@ -33,7 +67,7 @@ export default function Form() {
                 </select>
             </div>
 
-            <input className="glass mt-2 p-2 uppercase text-gray-800 hover:font-bold cursor-pointer active:font-normal"
+            <input className="glass-btn mt-2 p-2 uppercase text-gray-800 hover:font-bold cursor-pointer active:font-normal"
                 type="submit"
                 value={"Ver Precio"} />
         </form>

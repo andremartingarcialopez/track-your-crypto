@@ -17,3 +17,18 @@ body {
   -webkit-backdrop-filter: blur(4.7px);
   border: 2px solid rgba(255, 255, 255, 0.58);
 }
+
+.glass-btn {
+  /* From https://css.glass */
+  background: rgba(21, 58, 224, 0.362);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.7px);
+  -webkit-backdrop-filter: blur(4.7px);
+  border: 2px solid rgba(255, 255, 255, 0.58);
+  
+}
+
+.glass-btn:hover{
+  background:  rgba(21, 58, 224, 0.491);
+}
