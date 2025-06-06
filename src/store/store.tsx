@@ -1,19 +1,28 @@
 import axios from "axios";
 import { create } from "zustand";
 import { SchemaCryptoInfo, SchemaCryptoSelect } from "../schemas/schemas";
-import type { CryptoSelect, SelectForm } from "../types/types";
+import type { CryptoInfo, CryptoSelect, SelectForm } from "../types/types";
 import { devtools } from "zustand/middleware";
 
 
 type CryptoStoreTypes = {
-    fetchCryptos: () => void
     cryptosSelect: CryptoSelect
+    cryptoInfo: CryptoInfo
+    fetchCryptos: () => void
     fetchCryptoInfo: (selectForm: SelectForm) => void
 }
 
 export const useCryptoStore = create<CryptoStoreTypes>()(
     devtools((set) => ({
         cryptosSelect: [],
+        cryptoInfo: {
+            PRICE: "",
+            LOWDAY: "",
+            HIGHDAY: "",
+            IMAGEURL: "",
+            LASTUPDATE: "",
+            CHANGE24HOUR: "",
+        },
         fetchCryptos: async () => {
             const result = await getCryptos();
             set((set) => ({
@@ -23,8 +32,12 @@ export const useCryptoStore = create<CryptoStoreTypes>()(
             }))
         },
 
-        fetchCryptoInfo: (selectForm: SelectForm) => {
-            getCryptoInfo(selectForm)
+        fetchCryptoInfo: async (selectForm: SelectForm) => {
+            const result = await getCryptoInfo(selectForm)
+            set((state) => ({
+                ...state,
+                cryptoInfo: result
+            }))
         }
     }))
 )
@@ -47,10 +60,10 @@ async function getCryptoInfo(selectForm: SelectForm) {
 
     try {
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${selectForm.cryptoCurrency}&tsyms=${selectForm.currency}`;
-        const { data: { DISPLAY } } = await axios(url);        
+        const { data: { DISPLAY } } = await axios(url);
         const result = SchemaCryptoInfo.safeParse(DISPLAY[selectForm.cryptoCurrency][selectForm.currency]);
         if (result.success) {
-            console.log(result.data);
+            return result.data
         }
     } catch (error) {
         console.log(error)

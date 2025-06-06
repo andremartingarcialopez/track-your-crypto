@@ -27,3 +27,5 @@ export const SchemaCryptoInfo = z.object({
     LASTUPDATE: z.string(),
     CHANGE24HOUR: z.string(),
 })
+
+

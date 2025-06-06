@@ -3,6 +3,7 @@ import { currencies } from "../data/data";
 import { useCryptoStore } from "../store/store";
 import ErrorMessage from "./ErrorMessage";
 import type { SelectForm } from "../types/types";
+import CryptoInfo from "./CryptoInfo";
 
 export default function Form() {
 
@@ -71,6 +72,8 @@ export default function Form() {
             <input className="glass mt-2 p-2 uppercase text-gray-800 hover:font-bold cursor-pointer active:font-normal"
                 type="submit"
                 value={"Ver Precio"} />
+
+                <CryptoInfo/>
         </form>
     )
 }
