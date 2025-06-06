@@ -13,3 +13,17 @@ export const SchemaCryptoSelect = z.array(
         })
     })
 )
+
+export const SchemaSelectForm = z.object({
+    currency: z.string(),
+    cryptoCurrency: z.string(),
+});
+
+export const SchemaCryptoInfo = z.object({
+    PRICE: z.string(),
+    LOWDAY: z.string(),
+    HIGHDAY: z.string(),
+    IMAGEURL: z.string(),
+    LASTUPDATE: z.string(),
+    CHANGE24HOUR: z.string(),
+})

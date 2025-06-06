@@ -2,12 +2,13 @@ import { useState } from "react";
 import { currencies } from "../data/data";
 import { useCryptoStore } from "../store/store";
 import ErrorMessage from "./ErrorMessage";
+import type { SelectForm } from "../types/types";
 
 export default function Form() {
 
-    const { cryptosSelect } = useCryptoStore();
+    const { cryptosSelect, fetchCryptoInfo } = useCryptoStore();
     const [error, setError] = useState("");
-    const [selectForm, setSelectForm] = useState({
+    const [selectForm, setSelectForm] = useState<SelectForm>({
         currency: "",
         cryptoCurrency: ""
     });
@@ -27,7 +28,7 @@ export default function Form() {
         }
 
         setError("");
-        console.log(selectForm);
+        fetchCryptoInfo(selectForm);
     }
 
     return (
@@ -67,7 +68,7 @@ export default function Form() {
                 </select>
             </div>
 
-            <input className="glass-btn mt-2 p-2 uppercase text-gray-800 hover:font-bold cursor-pointer active:font-normal"
+            <input className="glass mt-2 p-2 uppercase text-gray-800 hover:font-bold cursor-pointer active:font-normal"
                 type="submit"
                 value={"Ver Precio"} />
         </form>
