@@ -2,7 +2,7 @@ import { currencies } from "../data/data";
 
 export default function Form() {
     return (
-        <form className="glass p-5 mx-2 my-4 flex flex-col justify-center items-stretch space-y-4">
+        <form className="glass p-5 mx-2 mb-4 flex flex-col justify-center items-stretch space-y-4">
             <div>
                 <label className="font-semibold text-gray-800" htmlFor="currency">Moneda</label>
                 <select className="glass w-full px-1 py-2"
