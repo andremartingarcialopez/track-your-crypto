@@ -25,7 +25,7 @@ export const SchemaCryptoInfo = z.object({
     HIGHDAY: z.string(),
     IMAGEURL: z.string(),
     LASTUPDATE: z.string(),
-    CHANGE24HOUR: z.string(),
+    OPENDAY: z.string(),
 })
 
 

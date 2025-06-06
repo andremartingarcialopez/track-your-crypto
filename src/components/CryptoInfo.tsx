@@ -11,10 +11,10 @@ export default function CryptoInfo() {
                     <img className="md:mx-5 my-5 md:my-0" src={`https://cryptocompare.com${cryptoInfo.IMAGEURL}`} alt="Logo-Cripto-Moneda" />
 
                 <div className="flex flex-col justify-center items-center md:items-stretch space-y-2">
+                    <CryptoInfoIteam label="Comienzo del dia" data={cryptoInfo.OPENDAY}/>
                     <CryptoInfoIteam label="Precio Actual" data={cryptoInfo.PRICE}/>
                     <CryptoInfoIteam label="Maximo del Dia" data={cryptoInfo.HIGHDAY}/>
                     <CryptoInfoIteam label="Minimo del Dia" data={cryptoInfo.LOWDAY}/>
-                    <CryptoInfoIteam label="Cambio Ultimas 24Hrs" data={cryptoInfo.CHANGE24HOUR}/>
                     <CryptoInfoIteam label="Ultima Actualizacion" data={cryptoInfo.LASTUPDATE}/>
                 </div>
             </div>
